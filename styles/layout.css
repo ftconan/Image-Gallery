@@ -16,13 +16,12 @@ li {
 	padding: 1em;
 	list-style: none;
 }
-a {
-	color：#c60;
-	background-color: transparent;
-	font-weight: bold;
-	text-decoration: none;
+#imagegallery {
+	list-style: none;
 }
-img {
-	display: block;
-	clear: both;
+#imagegallery li {
+	display: inline;
+}
+#imagegallery li a img {
+	border: 0;
 }
