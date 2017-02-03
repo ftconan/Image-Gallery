@@ -16,13 +16,22 @@ function showPic(whichPic) {
 	// 切换图片
 	var source = whichPic.getAttribute("href");
 	var placeholder = document.getElementById("placeholder");
+
+	// 检查placeholder的nodeName是否是IMG
+	if (placeholder.nodeName != "IMG") {
+		return false;
+	}
 	placeholder.setAttribute("src", source);
 
 	// 切换文字
 	if (document.getElementById("description")) {
-		var text = whichPic.getAttribute("title");
+		var text = whichPic.getAttribute("title") ? whichPic.getAttribute("title") : "";
 		var description = document.getElementById("description");
-		description.firstChild.nodeValue = text;
+		
+		// 是否是文本节点
+		if (description.firstChild.nodeType === 3) {
+			description.firstChild.nodeValue = text;
+		}
 	}
 
 	return true;
@@ -45,7 +54,7 @@ function prepareGallery() {
 	for (var i = 0; i < links.length; i++) {
 		links[i].onclick = function() {
 			// this 代表 links[i]
-			// 如果showPic返回true,我们就返回false，浏览器不会打开那个链接
+			// 如果showPic返回true,我们就返回false，浏览器不会打开那个链接 x
 			return !showPic(this);      
 		};
 	}
