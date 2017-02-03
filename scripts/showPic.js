@@ -4,6 +4,29 @@ window.onload = function() {
 	countBodyChildren();
 };
 
+// 图片库预处理函数
+function prepareGallery() {
+	// 如果没有以下方法，不执行后续程序
+	if (!document.getElementsByTagName) {
+		return false;
+	}
+	if (!document.getElementById) {
+		return false;
+	}
+	if (!document.getElementById("imagegallery")) {
+		return false;
+	}
+	var gallery = document.getElementById("imagegallery");
+	var links = gallery.getElementsByTagName("a");
+	for (var i = 0; i < links.length; i++) {
+		links[i].onclick = function() {
+			// this 代表 links[i]
+			// 如果showPic返回true,我们就返回false，浏览器不会打开那个链接 x
+			return showPic(this) ? false : true;      
+		};
+	}
+}
+
 // 展示图片函数
 // @whichPic 超链接节点
 // return true;
@@ -35,29 +58,6 @@ function showPic(whichPic) {
 	}
 
 	return true;
-}
-
-// 图片库预处理函数
-function prepareGallery() {
-	// 如果没有以下方法，不执行后续程序
-	if (!document.getElementsByTagName) {
-		return false;
-	}
-	if (!document.getElementById) {
-		return false;
-	}
-	if (!document.getElementById("imagegallery")) {
-		return false;
-	}
-	var gallery = document.getElementById("imagegallery");
-	var links = gallery.getElementsByTagName("a");
-	for (var i = 0; i < links.length; i++) {
-		links[i].onclick = function() {
-			// this 代表 links[i]
-			// 如果showPic返回true,我们就返回false，浏览器不会打开那个链接 x
-			return !showPic(this);      
-		};
-	}
 }
 
 // 计算body中的子节点函数
